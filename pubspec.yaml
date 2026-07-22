@@ -69,11 +69,20 @@ flutter_launcher_icons:
     theme_color: "#7C4DFF"
 
 flutter_native_splash:
-  # بدون اسپلش گرافیکی: فقط یک پس‌زمینه‌ی تخت و تیره هم‌رنگ با تم اپ، تا موقع
-  # بالا آمدن اپ فقط یک صفحه‌ی ساده دیده شود (نه لوگو، نه متن).
+  # پس‌زمینه‌ی تخت تیره + لوگوی اپ در مرکز + نام برند در پایین.
   color: "#0E0B1A"
   color_dark: "#0E0B1A"
+  image: assets/splash_logo.png
+  branding: assets/splash_wordmark.png
+  branding_dark: assets/splash_wordmark.png
+  branding_mode: bottom
+  branding_bottom_padding: 56
+  android_gravity: center
+  ios_content_mode: center
   android_12:
     color: "#0E0B1A"
     color_dark: "#0E0B1A"
+    image: assets/splash_logo.png
+    branding: assets/splash_wordmark.png
+    branding_dark: assets/splash_wordmark.png
   web: false
