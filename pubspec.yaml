@@ -1,0 +1,82 @@
+name: qrcode
+description: "ساخت، سفارشی‌سازی و اسکن کد QR"
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  pretty_qr_code: ^3.6.0
+  qr: ^3.0.2
+  mobile_scanner: ^7.4.0
+  image_picker: 1.2.2
+  share_plus: 12.0.2
+  gal: ^2.3.2
+  permission_handler: ^12.0.3
+  shared_preferences: ^2.5.5
+  provider: ^6.1.5+1
+  flex_color_picker: 3.7.2
+  path_provider: 2.1.5
+  url_launcher: ^6.3.2
+  uuid: ^4.6.0
+  shamsi_date: ^1.1.1
+  web: ^1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/fonts/
+    - assets/logo.png
+
+  fonts:
+    - family: IRANYekan
+      fonts:
+        - asset: assets/fonts/IRANYekanLight.ttf
+          weight: 300
+        - asset: assets/fonts/IRANYekanRegular.ttf
+          weight: 400
+        - asset: assets/fonts/IRANYekanMedium.ttf
+          weight: 500
+        - asset: assets/fonts/IRANYekanBold.ttf
+          weight: 700
+        - asset: assets/fonts/IRANYekanExtraBold.ttf
+          weight: 800
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo.png"
+  remove_alpha_ios: true
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/logo.png"
+    background_color: "#0E0B1A"
+    theme_color: "#7C4DFF"
+
+flutter_native_splash:
+  # پس‌زمینه‌ی تیره در هر دو حالت تا کارت تیره‌ی لوگو و گوشه‌های شفافش یکدست شوند.
+  color: "#0E0B1A"
+  color_dark: "#0E0B1A"
+  image: assets/splash_logo.png
+  android_gravity: center
+  ios_content_mode: center
+  android_12:
+    color: "#0E0B1A"
+    color_dark: "#0E0B1A"
+    image: assets/splash_logo.png
+  web: false
