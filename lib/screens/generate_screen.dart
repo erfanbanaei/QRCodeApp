@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:gal/gal.dart';
@@ -31,7 +32,6 @@ class _GenerateScreenState extends State<GenerateScreen> {
   QrStyleOptions _style = const QrStyleOptions();
   bool _busy = false;
 
-  final _qrKey = GlobalKey();
   final _historyService = HistoryService();
 
   final _textController = TextEditingController();
@@ -178,6 +178,23 @@ class _GenerateScreenState extends State<GenerateScreen> {
     );
   }
 
+  /// تصویر QR را مستقیماً از روی داده و استایل می‌سازد — مستقل از ویجتِ روی
+  /// صفحه، تا اگر پیش‌نمایش با اسکرول از دید خارج شده باشد هم عکس‌گیری کار کند.
+  Future<Uint8List?> _renderQrBytes() async {
+    final data = _currentData;
+    if (data.isEmpty) return null;
+    final qrImage = QrImage(
+      QrCode.fromData(data: data, errorCorrectLevel: _style.eccLevel.value),
+    );
+    final config = createLocalImageConfiguration(context);
+    final byteData = await qrImage.toImageAsBytes(
+      size: 1024,
+      decoration: _decoration,
+      configuration: config,
+    );
+    return byteData?.buffer.asUint8List();
+  }
+
   Future<void> _pickLogo() async {
     final picker = ImagePicker();
     final file = await picker.pickImage(source: ImageSource.gallery, maxWidth: 600);
@@ -211,7 +228,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
     if (_currentData.isEmpty || _busy) return;
     setState(() => _busy = true);
     try {
-      final bytes = await QrExport.captureBoundary(_qrKey);
+      final bytes = await _renderQrBytes();
       if (bytes == null) throw Exception('امکان ساخت تصویر از کد نبود');
       await QrExport.saveToGallery(bytes);
       unawaited(_addToHistory());
@@ -235,7 +252,7 @@ class _GenerateScreenState extends State<GenerateScreen> {
     if (_currentData.isEmpty || _busy) return;
     setState(() => _busy = true);
     try {
-      final bytes = await QrExport.captureBoundary(_qrKey);
+      final bytes = await _renderQrBytes();
       if (bytes == null) throw Exception('امکان ساخت تصویر از کد نبود');
       await QrExport.share(bytes);
       unawaited(_addToHistory());
@@ -502,16 +519,13 @@ class _GenerateScreenState extends State<GenerateScreen> {
                       ),
                     ],
                   ),
-                  child: RepaintBoundary(
-                    key: _qrKey,
-                    child: Container(
-                      color: _style.backgroundColor,
-                      padding: const EdgeInsets.all(6),
-                      child: PrettyQrView.data(
-                        data: data,
-                        errorCorrectLevel: _style.eccLevel.value,
-                        decoration: _decoration,
-                      ),
+                  child: Container(
+                    color: _style.backgroundColor,
+                    padding: const EdgeInsets.all(6),
+                    child: PrettyQrView.data(
+                      data: data,
+                      errorCorrectLevel: _style.eccLevel.value,
+                      decoration: _decoration,
                     ),
                   ),
                 ),
