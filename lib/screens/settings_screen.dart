@@ -71,7 +71,13 @@ class SettingsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('کیوآرکد من', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+                          Row(
+                            children: [
+                              Text('QR Code', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800)),
+                              const SizedBox(width: 8),
+                              Text('نسخه ۱٫۰٫۰', style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary)),
+                            ],
+                          ),
                           const SizedBox(height: 4),
                           Text('ساخت و اسکن کد QR با شخصی‌سازی کامل', style: Theme.of(context).textTheme.bodySmall),
                         ],

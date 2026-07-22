@@ -38,7 +38,7 @@ class QrExport {
         throw Exception('دسترسی به گالری داده نشد');
       }
     }
-    await Gal.putImageBytes(bytes, album: 'کیوآرکد من', name: name);
+    await Gal.putImageBytes(bytes, album: 'QR Code', name: name);
   }
 
   static Future<File> writeToTempFile(Uint8List bytes, {String name = 'qrcode'}) async {
