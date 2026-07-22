@@ -8,7 +8,7 @@
 PRODUCT_NAME = qrcode
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.qrcode
+PRODUCT_BUNDLE_IDENTIFIER = ir.erfanbanaei.qrcode
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2026 com.example. All rights reserved.
